@@ -1,16 +1,6 @@
-GEM
-  specs:
-<<<<<<< HEAD
+source 'http://rubygems.org'
+
   	gem 'google_drive'
 	gem 'json'
 	gem 'sinatra'
-=======
-
->>>>>>> origin/master
-PLATFORMS
-  ruby
-
-DEPENDENCIES
-
-BUNDLED WITH
-   1.12.5
+ruby '1.9.3'
