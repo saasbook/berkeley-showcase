@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% require 'json'
+       require 'mail'
+      
+      hash_holder = []
+      #Go through all the values of the array with json values
+      @new_holder.each do |object| 
+      	data_hash = JSON.parse(object) #convert the json to a Hash
+      	hash_holder.push(data_hash) #add the new hash to a new array (hash_holder)%> 
+    <% end %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <title>More Info</title>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/Chart.js"></script>
+    <script src="assets/js/modernizr.custom.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu">
+    <!-- Menu -->
+    
+    <!-- ========== HEADER SECTION ========== -->
+    <div id="itemwrap">
+      <div class="container">
+        <br>
+        <% array_id = @task.split('-') #take the given value after the / and split it using the -
+          hash_holder.each do |hash_object|  
+          	# if the values of the hash match that of the url 
+          	if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %> 
+        <h1 style = "font-size: 90px;"><%=hash_object["Project"]%></h1>
+        <h2><%=hash_object["Description"]%></h2>
+        <%end%>
+        <%end%>
+        <div class="row">
+          <br>
+          <br>
+          <br>
+          <div class="col-lg-6 col-lg-offset-3">
+          </div>
+        </div>
+      </div>
+      <!-- /container -->
+    </div>
+    <!-- /headerwrap -->
+    <!-- ========== WHITE SECTION ========== -->
+    <div id="w">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <h3>
+              <br> 
+              <bold>STUDENTS</bold>
+              <br/>
+              <% array_id = @task.split('-')
+                hash_holder.each do |hash_object|  
+                	if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %>
+              <p><%= hash_object["Students"]  %></p>
+              <% end %>
+              <% end%>
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- /container -->
+    </div>
+    <!-- /w -->
+    <!-- ========== SERVICES - GREY SECTION ========== -->
+    <section id="services" name="services"></section>
+    <div id="g">
+      <div class="container">
+        <div class="row">
+          <br>
+          <h3>MORE DETAILS</h3>
+          <br>
+          <% array_id = @task.split('-')
+            hash_holder.each do |hash_object|  
+            	if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %>
+          <%#if the semester and team match that of the url%>
+          <div class="col-lg-3">
+            <%#Print all of the below information (for everything below customer, it only prints if there is given information for that topic%>
+            <h4>Semester</h4>
+            <p><%= hash_object["Semester"]  %></p>
+            <h4>Team Number</h4>
+            <p><%= hash_object["Team#"]  %></p>
+            <h4>Customer</h4>
+            <p><%= hash_object["Customer"]  %></p>
+            <% if !(hash_object["Contact Email"] == "No known information") then%> 
+            <% if hash_object["Contact Email"].include? "@"%>
+            <%mail = Mail::Address.new(hash_object["Contact Email"]) %>
+            <p><a href="mailto:<%=mail.address%>">Customer Contact Email</a></p>
+            <%else%>
+            <p><a target="_blank" href="<%= hash_object["Contact Email"]%>">Customer Contact Email</a></p>
+            <%end%>
+            <%end%>
+            <% if !(hash_object["Screencast"] == "No known information") then%> 
+            <h4>Screencast</h4>
+            <p><a target="_blank" href="<%= hash_object["Screencast"]%>">Click Here to access Screencast</a></p>
+            <%end%>
+            <% if !(hash_object["Poster PDF"] == "No known information") then%> 
+            <h4>Poster</h4>
+            <p><a target="_blank" href="<%= hash_object["Poster PDF"]%>">Click Here to access Poster</a></p>
+            <%end%>
+            <% if !(hash_object["Deployment"] == "No known information") then%> 
+            <h4>Website</h4>
+            <p><a target="_blank" href="<%= hash_object["Deployment"]%>">Click Here to access Website</a></p>
+            <%end%>
+            <% if !(hash_object["Repo"] == "No known information") then%> 
+            <h4>GitHub Repo</h4>
+            <p><a target="_blank" href="<%= hash_object["Repo"]%>">Click Here to access GitHub Repo</a></p>
+            <%end%>
+            <% if !(hash_object["CodeClimate"] == "No known information") then%> 
+            <h4>CodeClimate</h4>
+            <p><a target="_blank" href="<%= hash_object["CodeClimate"]%>">Click Here to access the CodeClimate</a></p>
+            <%end%>
+            <% if !(hash_object["Tracker"] == "No known information") then%> 
+            <h4>Pivotal Tracker</h4>
+            <p><a target="_blank" href="<%= hash_object["Tracker"]%>">Click Here to access the Pivotal Tracker</a></p>
+            <%end%>
+            <% if !(hash_object["EntryInterview"] == "No known information") then%> 
+            <h4>Entry Interview</h4>
+            <p><a target="_blank" href="<%= hash_object["EntryInterview"]%>">Click Here to view the Entry Interview</a></p>
+            <%end%>
+            <% if !(hash_object["ExitInterview"] == "No known information") then%> 
+            <h4>Exit Interview</h4>
+            <p><a target="_blank" href="<%= hash_object["ExitInterview"]%>">Click Here to view the Exit Interview</a></p>
+            <%end%>
+          </div>
+          <% end %>
+          <% end %>
+          <h3><a href = "/projects">Back to Projects</a></h3>
+          <br>
+        </div>
+      </div>
+      <!-- /container -->
+    </div>
+    <!-- /g -->
+    <!-- ========== FOOTER SECTION ========== -->
+    <section id="contact" name="contact"></section>
+    <div id="f">
+      <div class="container">
+        <div class="row">
+          <br>
+          <h3><b>CONTACT US</b></h3>
+          <br>
+          <div class="col-lg-4">
+            <h3><b>Send Us A Message:</b></h3>
+            <h3><a href="mailto:fox@cs.berkeley.edu">fox@cs.berkeley.edu</a></h3>
+            <br>
+          </div>
+          <div class="col-lg-4">
+            <h3><b>Call Us:</b></h3>
+            <h3>(510) 642-6000</h3>
+            <br>
+          </div>
+          <div class="col-lg-4">
+            <h3><b>We Are Social</b></h3>
+            <p>
+              <a target="_blank" href="https://www.facebook.com/UCBerkeley/"><i class="icon-facebook"></i></a>
+              <a target="_blank" href="https://twitter.com/UCBerkeley"><i class="icon-twitter"></i></a>
+              <a target="_blank" href="http://www.gmail.com"><i class="icon-envelope"></i></a>
+            </p>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /container -->
+    <div id="c">
+      <div class="container">
+        <br>
+        <p>Created by <a target="_blank" href="http://www.berkeley.edu">Berkeley</a></p>
+        <br>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+      ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/classie.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/smoothscroll.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

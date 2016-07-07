@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% require 'json'
+      require 'mail'
+      
+      hash_holder = []
+      #Go through all the values of the array with json values
+      @new_holder.each do |object| 
+        data_hash = JSON.parse(object) #convert the json to a Hash
+        hash_holder.push(data_hash) #add the new hash to a new array (hash_holder)%> 
+    <% end %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+    <title>Berkeley Showcase</title>
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/Chart.js"></script>
+    <script src="assets/js/modernizr.custom.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu">
+    <!-- Menu -->
+    <nav class="menu" id="theMenu">
+      <div class="menu-wrap">
+        <h1 class="logo"><a href="home.html">Showcase</a></h1>
+        <i class="icon-remove menu-close"></i>
+        <a href=".." class="smoothScroll", style = "font-family: Raleway;">Home</a>
+        <a href="/projects" class="smoothScroll", style = "font-family: Raleway;">Projects</a>
+      </div>
+      <!-- Menu button -->
+      <div id="menuToggle"><i class="icon-reorder"></i></div>
+    </nav>
+    <!-- ========== HEADER SECTION ========== -->
+    <div id="itemwrap">
+      <div class="container">
+        <br>
+        <h1>Showcase</h1>
+        <h2>Berkeley Project Gallery</h2>
+        <div class="row">
+          <br>
+          <br>
+          <br>
+          <div class="col-lg-6 col-lg-offset-3">
+          </div>
+        </div>
+      </div>
+      <!-- /container -->
+    </div>
+    <!-- /headerwrap -->
+    <h1 class="Search">Search Bar</h1>
+    <div class="flexsearch">
+      <div class="flexsearch--wrapper">
+        <form class="flexsearch--form" action="/projects" method="POST">
+          <div class="flexsearch--input-wrapper">
+            <input class="flexsearch--input" type="text" name ="text" placeholder=" Search">
+          </div>
+          <input class="flexsearch--submit" type="submit" value="&#10140;"/>
+        </form>
+      </div>
+    </div>
+    <!-- ========== WHITE SECTION ========== -->
+    <div id="w">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <h3>WELCOME TO <br/><strong>SHOWCASE</strong><br/>
+              CREATED BY BERKELEY
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- /container -->
+    </div>
+    <!-- /w -->
+    <% def hasWord (hash_thing, word) 
+      hash_thing.each do |key, value|
+          if (key.downcase.include? word.downcase) || (value.downcase.include? word.downcase) 
+              return true
+          end     
+      end
+      return false
+      end %>
+    <!-- Beginning of Cards Section... LOT OF CODE! -->
+    <section id="services" name="services"></section>
+    <div id="g">
+      <div class="container">
+        <div class="row">
+          <h3><strong>PROJECTS</strong></h3>
+          <% z = 0
+            sampleIMG = ["../assets/img/sampleImg1.jpeg","../assets/img/sampleImg2.jpeg","../assets/img/sampleImg3.jpeg","../assets/img/sampleImg4.jpeg","../assets/img/sampleImg5.jpeg","../assets/img/sampleImg6.jpeg","../assets/img/sampleImg7.jpeg"] #array of background images
+            listIMG = sampleIMG.shuffle #shuffles array
+            
+            if (@values.nil?)
+            hash_holder.each do |hash_object|%>
+          <div class="col-lg-3">
+            <div class="wrapper">
+              <div class="card radius shadowDepth1">
+                <div class="card__image border-tlr-radius">
+                  <% z += 1
+                    if z >= listIMG.length then
+                        z = 0 # increases z to call next image, after it is > length, it resests
+                        listIMG = sampleIMG.shuffle #shuffles the order of the images 
+                    
+                     end %>
+                  <img src=<%=listIMG[z]%> alt="image" class="border-tlr-radius" height="130">
+                </div>
+                <div class="card__content card__padding">
+                  <div class="card__share">
+                    <div class="card__social">  
+                      <a class="share-icon facebook" href="#"><span class="fa fa-facebook"></span></a>
+                      <a class="share-icon twitter" href="#"><span class="fa fa-twitter"></span></a>
+                      <a class="share-icon googleplus" href="#"><span class="fa fa-google-plus"></span></a>
+                    </div>
+                    <a id="share" class="share-toggle share-icon" href="/projects/<%= hash_object["Semester"]%>-<%= hash_object["Team#"]%>"></a>
+                  </div>
+                  <div class="card__meta">
+                    <% if !(hash_object["Deployment"] == "No known information") then%> 
+                    <a target="_blank" href="<%= hash_object["Deployment"]%>">Website</a>
+                    <%end%>
+                    <time><%= hash_object["Semester"]%></time>
+                  </div>
+                  <article class="card__article">
+                    <h2><a href="/projects/<%= hash_object["Semester"]%>-<%= hash_object["Team#"]%>"><%= hash_object["Project"]%></a></h2>
+                    <p>Description: <%= hash_object["Description"]%></p>
+                  </article>
+                </div>
+                <div class="card__action">
+                  <div class="card__author">
+                    <div class="card__author-content">
+                      <% if (hash_object["Contact Email"] == "No known information") then %> 
+                      For <%= hash_object["Customer"] #not a link if there is no link 
+                        %>
+                      <% elsif hash_object["Contact Email"].include? "@"%>
+                      <% mail = Mail::Address.new(hash_object["Contact Email"]) #this allows the email to be exracted from other material. If there is an email, mailto function is called%>
+                      For <a href="mailto:<%=mail.address%>"><%= hash_object["Customer"]%></a>
+                      <%else%>
+                      For <a target="_blank" href="<%= hash_object["Contact Email"]%>"><%= hash_object["Customer"] #if the email is a link to a website, this will become a link to that site
+                        %></a>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%end %>
+          <%else 
+            result = 0%>
+          <% hash_holder.each do |hash_object|%>
+          <%if hasWord(hash_object,@values)
+            result = 1%>
+          <div class="col-lg-3">
+            <div class="wrapper">
+              <div class="card radius shadowDepth1">
+                <div class="card__image border-tlr-radius">
+                  <% z += 1
+                    if z >= listIMG.length then
+                        z = 0 # increases z to call next image, after it is > length, it resests
+                        listIMG = sampleIMG.shuffle #shuffles the order of the images 
+                    
+                     end %>
+                  <img src=<%=listIMG[z]%> alt="image" class="border-tlr-radius" height="130">
+                </div>
+                <div class="card__content card__padding">
+                  <div class="card__share">
+                    <div class="card__social">  
+                      <a class="share-icon facebook" href="#"><span class="fa fa-facebook"></span></a>
+                      <a class="share-icon twitter" href="#"><span class="fa fa-twitter"></span></a>
+                      <a class="share-icon googleplus" href="#"><span class="fa fa-google-plus"></span></a>
+                    </div>
+                    <a id="share" class="share-toggle share-icon" href="/projects/<%= hash_object["Semester"]%>-<%= hash_object["Team#"]%>"></a>
+                  </div>
+                  <div class="card__meta">
+                    <% if !(hash_object["Deployment"] == "No known information") then%> 
+                    <a target="_blank" href="<%= hash_object["Deployment"]%>">Website</a>
+                    <%end%>
+                    <time><%= hash_object["Semester"]%></time>
+                  </div>
+                  <article class="card__article">
+                    <h2><a href="/projects/<%= hash_object["Semester"]%>-<%= hash_object["Team#"]%>"><%= hash_object["Project"]%></a></h2>
+                    <p>Description: <%= hash_object["Description"]%></p>
+                  </article>
+                </div>
+                <div class="card__action">
+                  <div class="card__author">
+                    <div class="card__author-content">
+                      <% if (hash_object["Contact Email"] == "No known information") then %> 
+                      For <%= hash_object["Customer"] #not a link if there is no link 
+                        %>
+                      <% elsif hash_object["Contact Email"].include? "@"%>
+                      <% mail = Mail::Address.new(hash_object["Contact Email"]) #this allows the email to be exracted from other material. If there is an email, mailto function is called%>
+                      For <a href="mailto:<%=mail.address%>"><%= hash_object["Customer"]%></a>
+                      <%else%>
+                      For <a target="_blank" href="<%= hash_object["Contact Email"]%>"><%= hash_object["Customer"] #if the email is a link to a website, this will become a link to that site
+                        %></a>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%end%>
+          <%end %>
+
+          <h3> You Searched For "<%=@values%>"<a href="/projects"> <br>Cancel Search</a></h3>
+          <%if result == 0 then %>
+          <h1>No Results</h1>
+          <%end%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+    <!-- End of Cards Section... LOT OF CODE! -->
+    <!-- ========== FOOTER SECTION ========== -->
+    <div id="f">
+      <div class="container">
+        <div class="row">
+          <h3><b>CONTACT US</b></h3>
+          <br>
+          <div class="col-lg-4">
+            <h3><b>Send Us A Message:</b></h3>
+            <h3><a href="mailto:fox@cs.berkeley.edu">fox@cs.berkeley.edu</a></h3>
+            <br>
+          </div>
+          <div class="col-lg-4">
+            <h3><b>Call Us:</b></h3>
+            <h3>(510) 642-6000</h3>
+            <br>
+          </div>
+          <div class="col-lg-4">
+            <h3><b>We Are Social</b></h3>
+            <p>
+              <a target="_blank" href="https://facebook.com/UCBerkeley"><i class="icon-facebook"></i></a>
+              <a target="_blank" href="https://twitter.com/UCBerkeley"><i class="icon-twitter"></i></a>
+              <a target="_blank" href="https://gmail.com"><i class="icon-envelope"></i></a>
+            </p>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /container -->
+    </div><!-- /f -->
+    <div id="c">
+      <div class="container">
+        <p>Created by <a href="http://www.berkeley.edu">Berkeley</a></p>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+      ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/classie.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/retina.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+      $('.carousel').carousel({
+        interval: 3500
+      })
+    </script>
+  </body>
+</html>
