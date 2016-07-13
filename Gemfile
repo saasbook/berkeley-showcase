@@ -1,3 +1,9 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-ruby '2.2.4'
+  	gem 'google_drive'
+	gem 'json'
+	gem 'sinatra'
+	gem 'rack'
+	gem 'mail'
+
+ruby '2.2.5'
