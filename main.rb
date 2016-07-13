@@ -2,7 +2,8 @@ require 'google_drive'
 require 'json'
 require 'sinatra'
 
-
+class MyApp < Sinatra::Base
+    
 session = GoogleDrive.saved_session("config.json")
 # get important information such as user password and username etc.
 ws = session.spreadsheet_by_key("1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY").worksheets[1]
@@ -59,4 +60,4 @@ post '/projects' do
     @values =  params[:text]
     erb :"index.html" #sends the information to index.html (projects page)
 end
-
+end
