@@ -2,7 +2,6 @@ require 'google_drive'
 require 'json'
 require 'sinatra'
 
-class MyApp < Sinatra::Base
     
 session = GoogleDrive.saved_session("config.json")
 # get important information such as user password and username etc.
@@ -59,5 +58,4 @@ post '/projects' do
     @new_holder = reloadInfo(ws) #reloads the information
     @values =  params[:text]
     erb :"index.html" #sends the information to index.html (projects page)
-end
 end
