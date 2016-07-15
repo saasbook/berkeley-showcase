@@ -54,6 +54,10 @@ get '/projects/:task' do #individual additional information pages
     erb :"infopage.html" #sends the information and the value of task to infopage.html (extra info page)
 end
 
+get '/info' do # info page
+
+end
+
 post '/projects' do
     @new_holder = reloadInfo(ws) #reloads the information
     @values =  params[:text]
