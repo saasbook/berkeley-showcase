@@ -40,7 +40,7 @@ def reloadInfo (ws)
 end
 
 get '/' do #home page
-    File.read(File.join('views', 'home.html')) #opens up the home page
+   redirect to('/projects') # redirects to project page
 end
 
 get '/projects' do # projects page
