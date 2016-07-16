@@ -55,7 +55,7 @@ get '/projects/:task' do #individual additional information pages
 end
 
 get '/info' do # info page
-
+    File.read(File.join('views', 'websiteinfo.html')) #opens up the home page
 end
 
 post '/projects' do
