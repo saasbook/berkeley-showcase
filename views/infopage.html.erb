@@ -89,20 +89,6 @@
           <%#if the semester and team match that of the url%>
           <div class="col-lg-3">
             <%#Print all of the below information (for everything below customer, it only prints if there is given information for that topic%>
-            <h4>Semester</h4>
-            <p><%= hash_object["Semester"]  %></p>
-            <h4>Team Number</h4>
-            <p><%= hash_object["Team#"]  %></p>
-            <h4>Customer</h4>
-            <p><%= hash_object["Customer"]  %></p>
-            <% if !(hash_object["Contact Email"] == "No known information") then%> 
-            <% if hash_object["Contact Email"].include? "@"%>
-            <%mail = Mail::Address.new(hash_object["Contact Email"]) %>
-            <p><a href="mailto:<%=mail.address%>">Customer Contact Email</a></p>
-            <%else%>
-            <p><a target="_blank" href="<%= hash_object["Contact Email"]%>">Customer Contact Email</a></p>
-            <%end%>
-            <%end%>
             <% if !(hash_object["Screencast"] == "No known information") then%> 
             <h4>Screencast</h4>
             <p><a target="_blank" href="<%= hash_object["Screencast"]%>">Click Here to access Screencast</a></p>
@@ -135,6 +121,18 @@
             <h4>Exit Interview</h4>
             <p><a target="_blank" href="<%= hash_object["ExitInterview"]%>">Click Here to view the Exit Interview</a></p>
             <%end%>
+             <h4>Customer:</h4>
+            <% if !(hash_object["Contact Email"] == "No known information") then%> 
+              <% if hash_object["Contact Email"].include? "@"%>
+                <%mail = Mail::Address.new(hash_object["Contact Email"]) %>
+                <p><a href="mailto:<%=mail.address%>"><%= hash_object["Customer"]  %></a></p>
+              <%else%>
+                <p><a target="_blank" href="<%= hash_object["Contact Email"]%>"><%= hash_object["Customer"]  %></a></p>
+              <%end%>
+            <%else%> 
+            <p><%=hash_object["Customer"]%></p>
+            <%end%>
+            
             <% semester = hash_object["Semester"]
             year = "20" + semester[1] + semester[2]
             season = ""
