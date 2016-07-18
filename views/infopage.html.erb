@@ -3,6 +3,7 @@
   <head>
     <% require 'json'
        require 'mail'
+       require 'youtube_addy'
       
       hash_holder = []
       #Go through all the values of the array with json values
@@ -89,9 +90,22 @@
           <%#if the semester and team match that of the url%>
           <div class="col-lg-3">
             <%#Print all of the below information (for everything below customer, it only prints if there is given information for that topic%>
-            <% if !(hash_object["Screencast"] == "No known information") then%> 
+            <% screencast = hash_object["Screencast"]
+            if !(screencast == "No known information") then%> 
             <h4>Screencast</h4>
-            <p><a target="_blank" href="<%= hash_object["Screencast"]%>">Click Here to access Screencast</a></p>
+             <% if screencast.include? "youtu"%>
+                <%=YouTubeAddy.youtube_embed_url(screencast,420,315)%>
+             <% elsif screencast.include? "vimeo"
+             if screencast.include? "https" 
+             vimeo_url = "//player.vimeo.com/video/" + screencast[18..(screencast.length-1)]
+             else 
+              vimeo_url = "//player.vimeo.com/video/" + screencast[17..(screencast.length-1)]
+            end
+              %>
+                <iframe src= <%= vimeo_url%> width="WIDTH" height="HEIGHT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+             <%else%>
+                <p><a target="_blank" href="<%= hash_object["Screencast"]%>">Click Here to access Screencast</a></p>
+            <%end%>
             <%end%>
             <% if !(hash_object["Poster PDF"] == "No known information") then%> 
             <h4>Poster</h4>
