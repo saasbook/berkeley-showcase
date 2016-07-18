@@ -135,6 +135,16 @@
             <h4>Exit Interview</h4>
             <p><a target="_blank" href="<%= hash_object["ExitInterview"]%>">Click Here to view the Exit Interview</a></p>
             <%end%>
+            <% semester = hash_object["Semester"]
+            year = "20" + semester[1] + semester[2]
+            season = ""
+            if (semester[0] == "F") then 
+              season = "Fall" 
+            else 
+              season = "Spring"
+              end %>
+            <h4>When: </h4>
+            <p><%=season%>  <%=year%></p>
           </div>
           <% end %>
           <% end %>
