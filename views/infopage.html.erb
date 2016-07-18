@@ -4,7 +4,6 @@
     <% require 'json'
        require 'mail'
        require 'youtube_addy'
-      
       hash_holder = []
       #Go through all the values of the array with json values
       @new_holder.each do |object| 
@@ -15,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
     <title>More Info</title>
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -90,6 +89,7 @@
           <%#if the semester and team match that of the url%>
           <div class="col-lg-3">
             <%#Print all of the below information (for everything below customer, it only prints if there is given information for that topic%>
+            
             <% screencast = hash_object["Screencast"]
             if !(screencast == "No known information") then%> 
             <h4>Screencast</h4>
@@ -135,7 +135,8 @@
             <h4>Exit Interview</h4>
             <p><a target="_blank" href="<%= hash_object["ExitInterview"]%>">Click Here to view the Exit Interview</a></p>
             <%end%>
-             <h4>Customer:</h4>
+
+            <p>Customer:</p>
             <% if !(hash_object["Contact Email"] == "No known information") then%> 
               <% if hash_object["Contact Email"].include? "@"%>
                 <%mail = Mail::Address.new(hash_object["Contact Email"]) %>
@@ -146,7 +147,9 @@
             <%else%> 
             <p><%=hash_object["Customer"]%></p>
             <%end%>
-            
+
+
+
             <% semester = hash_object["Semester"]
             year = "20" + semester[1] + semester[2]
             season = ""
