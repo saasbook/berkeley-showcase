@@ -461,6 +461,16 @@ hr {
     padding-bottom: 5px;
     text-align: center;
 }
+
+#g h4{
+    display:inline;
+}
+
+#g form{
+    display:inline;
+}
+
+
 /* Dark Grey Wrap */
 
 #dg {
