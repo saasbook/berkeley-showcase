@@ -5,5 +5,6 @@ source 'https://rubygems.org'
 	gem 'sinatra'
 	gem 'rack'
 	gem 'mail'
+	gem 'youtube_addy'
 
 ruby '2.2.5'
