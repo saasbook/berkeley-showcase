@@ -117,24 +117,24 @@
       </div>
 
      <h4 style="position:relative; right:25px">
-        <% if !(hash_object["Deployment"] == "No known information") then%> 
+        
         Website
-        <%end%>
+
       </h4>
       <h4 style="position:relative; right:-17px">
-        <% if !(hash_object["Repo"] == "No known information") then%> 
+        
         GitHub Repo
-        <%end%>
+
       </h4>
       <h4 style="position:relative; left:42px">
-        <% if !(hash_object["CodeClimate"] == "No known information") then%> 
+       
         CodeClimate
-        <%end%>
+
       </h4>
       <h4 style="position:relative; left:60px">
-        <% if !(hash_object["Tracker"] == "No known information") then%> 
+        
         Pivotal Tracker
-        <%end%>
+
       </h4>
       <br>
 
@@ -142,21 +142,57 @@
       if !(hash_object["Deployment"].include? "http")then
         urlholder = "https://"
       end%>
-      <form action=<%= urlholder + hash_object["Deployment"]%> style="padding: 0px 15px 0px 15px">
+
+      
+        <% if !(hash_object["Deployment"] == "No known information") then%> 
+        <form action=<%= urlholder + hash_object["Deployment"]%> style="padding: 0px 15px 0px 15px">
         <input type="image" src="../assets/img/internetLogo.png" alt="Website" width="95" height="95">
-      </form>
+        </form>
+        <%else%>
+        <form action="" style="padding: 0px 15px 0px 15px">
+        <input type="image" src="../assets/img/internetLogoG.png" alt="Website" width="95" height="95">
+        </form>
+        
+        <%end%>
+      
       <!-- <img src="../assets/img/blank.png" style="width:30px;height:100px;"> -->
-      <form action="<%= hash_object["Repo"]%>" style="padding: 0px 15px 0px 15px">
+      
+        <% if !(hash_object["Repo"] == "No known information") then%> 
+        <form action="<%= hash_object["Repo"]%>" style="padding: 0px 15px 0px 15px">
         <input type="image" src="../assets/img/githubLogo.png" alt="GitHub" width="100" height="100">
-      </form>
+        </form>
+        <%else%>
+        <form action="" style="padding: 0px 15px 0px 15px">
+        <input type="image" src="../assets/img/githubLogoG.png" alt="GitHub" width="100" height="100">
+        </form>
+        <%end%>
+      
       <!-- <img src="../assets/img/blank.png" style="width:30px;height:100px;"> -->
+      
+      <% if !(hash_object["CodeClimate"] == "No known information") then%> 
       <form action="<%= hash_object["CodeClimate"]%>" style="padding: 0px 15px 0px 15px">
-        <input type="image" src="../assets/img/codeclimateLogo.png" alt="CodeClimate" width="100" height="100">
+      <input type="image" src="../assets/img/codeclimateLogo.png" alt="CodeClimate" width="100" height="100">
       </form>
+        <%else%>
+         <form action="" style="padding: 0px 15px 0px 15px">
+          <input type="image" src="../assets/img/codeclimateLogoG.png" alt="CodeClimate" width="100" height="100">
+          </form>
+      <%end%>
+        
+      
       <!-- <img src="../assets/img/blank.png" style="width:30px;height:100px;"> -->
+
+      
+      <% if !(hash_object["Tracker"] == "No known information") then%> 
       <form action="<%= hash_object["Tracker"]%>" style="padding: 0px 15px 0px 15px">
-        <input type="image" src="../assets/img/pivotalLogo.png" alt="PivotalTracker" width="100" height="100">
+      <input type="image" src="../assets/img/pivotalLogo.png" alt="PivotalTracker" width="100" height="100"> 
       </form>
+        <%else%>
+        <form action="" style="padding: 0px 15px 0px 15px">
+      <input type="image" src="../assets/img/pivotalLogoG.png" alt="PivotalTracker" width="100" height="100"> 
+      </form>
+        <%end%>
+     
       <br>
       <br>
        <% if !(hash_object["Poster PDF"] == "No known information") then%> 
