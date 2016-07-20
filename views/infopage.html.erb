@@ -33,12 +33,33 @@
     <div id="itemwrap">
       <div class="container">
         <br>
+
+        <!-- ========== Video ========== -->
         <% array_id = @task.split('-') #take the given value after the / and split it using the -
           hash_holder.each do |hash_object|  
             # if the values of the hash match that of the url 
             if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %> 
-        <h1 style = "font-size: 90px;"><%=hash_object["Project"]%></h1>
-        <h2><%=hash_object["Description"]%></h2>
+        <h1 style = "font-size: 90px;"> <a target="_blank" href=<%= hash_object["Screencast"]%>> <%=hash_object["Project"]%> </a></h1>
+        <% screencast = hash_object["Screencast"]
+              if !(screencast == "No known information") then%> 
+            <h4>Screencast</h4>
+            <% if screencast.include? "youtu"
+              youtube_url = "https://www.youtube.com/embed/" + screencast[(screencast.length-12)..(screencast.length-1)]
+              %>
+            <iframe src= <%=youtube_url%> width="700px" height="400px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <% elsif screencast.include? "vimeo"
+              if screencast.include? "https" 
+              vimeo_url = "//player.vimeo.com/video/" + screencast[18..(screencast.length-1)]
+              else 
+               vimeo_url = "//player.vimeo.com/video/" + screencast[17..(screencast.length-1)]
+              end
+               %>
+            <iframe src= <%= vimeo_url%> width="700px" height="400px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <%else%>
+            <p><a target="_blank" href="<%= hash_object["Screencast"]%>">Click Here to access Screencast</a></p>
+            <%end%>
+            <%end%>
+            <!-- ==================== -->
         <%end%>
         <%end%>
         <div class="row">
@@ -59,12 +80,14 @@
           <div class="col-lg-8 col-lg-offset-2">
             <h3>
               <br> 
-              <bold>STUDENTS</bold>
+              <bold>Description</bold>
+
               <br/>
               <% array_id = @task.split('-')
                 hash_holder.each do |hash_object|  
                   if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %>
-              <p><%= hash_object["Students"]  %></p>
+              <h2><%=hash_object["Description"]%></h2>
+
               <% end %>
               <% end%>
             </h3>
@@ -88,32 +111,12 @@
           <%#if the semester and team match that of the url%>
           <div class="col-lg-3">
             <%#Print all of the below information (for everything below customer, it only prints if there is given information for that topic%>
-            <% screencast = hash_object["Screencast"]
-              if !(screencast == "No known information") then%> 
-            <h4>Screencast</h4>
-            <% if screencast.include? "youtu"
-              youtube_url = "https://www.youtube.com/embed/" + screencast[(screencast.length-12)..(screencast.length-1)]
-              %>
-            <iframe src= <%=youtube_url%> width="WIDTH" height="HEIGHT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            <% elsif screencast.include? "vimeo"
-              if screencast.include? "https" 
-              vimeo_url = "//player.vimeo.com/video/" + screencast[18..(screencast.length-1)]
-              else 
-               vimeo_url = "//player.vimeo.com/video/" + screencast[17..(screencast.length-1)]
-              end
-               %>
-            <iframe src= <%= vimeo_url%> width="WIDTH" height="HEIGHT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            <%else%>
-            <p><a target="_blank" href="<%= hash_object["Screencast"]%>">Click Here to access Screencast</a></p>
-            <%end%>
-            <%end%>
-            <% if !(hash_object["Poster PDF"] == "No known information") then%> 
-            <h4>Poster</h4>
-            <p><a target="_blank" href="<%= hash_object["Poster PDF"]%>">Click Here to access Poster</a></p>
-            <%end%>
+            
           </div>
         </div>
       </div>
+
+     
       <h4 style="position:absolute;left:397px;">
         <% if !(hash_object["Deployment"] == "No known information") then%> 
         Website
@@ -136,8 +139,13 @@
       </h4>
       <br>
       <br>
-      <form action="<%= hash_object["Deployment"]%>">
-        <input type="image" src="../assets/img/internetLogo.png" alt="GitHub" width="100" height="100">
+
+      <% urlholder = ""
+      if !(hash_object["Deployment"].include? "http")then
+        urlholder = "https://"
+      end%>
+      <form action=<%= urlholder + hash_object["Deployment"]%>>
+        <input type="image" src="../assets/img/internetLogo.png" alt="Website" width="100" height="100">
       </form>
       <img src="../assets/img/blank.png" style="width:30px;height:100px;">
       <form action="<%= hash_object["Repo"]%>">
@@ -145,13 +153,17 @@
       </form>
       <img src="../assets/img/blank.png" style="width:30px;height:100px;">
       <form action="<%= hash_object["CodeClimate"]%>">
-        <input type="image" src="../assets/img/codeclimateLogo.png" alt="GitHub" width="100" height="100">
+        <input type="image" src="../assets/img/codeclimateLogo.png" alt="CodeClimate" width="100" height="100">
       </form>
       <img src="../assets/img/blank.png" style="width:30px;height:100px;">
       <form action="<%= hash_object["Tracker"]%>">
-        <input type="image" src="../assets/img/pivotalLogo.png" alt="GitHub" width="100" height="100">
+        <input type="image" src="../assets/img/pivotalLogo.png" alt="PivotalTracker" width="100" height="100">
       </form>
       <br>
+       <% if !(hash_object["Poster PDF"] == "No known information") then%> 
+            <h4>Poster</h4>
+            <p><a target="_blank" href="<%= hash_object["Poster PDF"]%>">Click Here to access Poster</a></p>
+            <%end%>
       <% if !(hash_object["EntryInterview"] == "No known information") then%> 
       <h4>Entry Interview</h4>
       <p><a target="_blank" href="<%= hash_object["EntryInterview"]%>">Click Here to view the Entry Interview</a></p>
@@ -170,6 +182,10 @@
       <%end%>
       <%else%> 
       <p><%=hash_object["Customer"]%></p>
+      <%end%>
+       <% if !(hash_object["Students"] == "No known information") then%> 
+      <h4>Team</h4>
+      <p><%=hash_object["Students"]%></p>
       <%end%>
       <% semester = hash_object["Semester"]
         year = "20" + semester[1] + semester[2]
