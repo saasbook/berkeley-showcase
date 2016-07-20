@@ -39,9 +39,17 @@
           hash_holder.each do |hash_object|  
             # if the values of the hash match that of the url 
             if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %> 
-        <h1 style = "font-size: 90px;"> <a target="_blank" href=<%= hash_object["Deployment"]%>> <%=hash_object["Project"]%> </a></h1>
-        <% screencast = hash_object["Screencast"]
+        
+        <% 
+          if   !(hash_object["Repo"] == "No known information") then%> 
+          <h1 style = "font-size: 90px;"> <a target="_blank" href=<%= hash_object["Deployment"]%>> <%=hash_object["Project"]%> </a></h1>
+            
+            <%else %>
+            <h1 style = "font-size: 90px;">  <%=hash_object["Project"]%> </h1>
+            <%end
+            screencast = hash_object["Screencast"]
               if !(screencast == "No known information") then%> 
+              
             <h4>Screencast</h4>
             <% if screencast.include? "youtu"
               youtube_url = "https://www.youtube.com/embed/" + screencast[(screencast.length-12)..(screencast.length-1)]
@@ -150,7 +158,7 @@
         </form>
         <%else%>
         <form action="" style="padding: 0px 15px 0px 15px">
-        <input type="image" src="../assets/img/internetLogoG.png" alt="Website" width="95" height="95">
+        <input type="image" src="../assets/img/internetLogoG.png" alt="Website" width="95" height="95" disabled>
         </form>
         
         <%end%>
@@ -163,7 +171,7 @@
         </form>
         <%else%>
         <form action="" style="padding: 0px 15px 0px 15px">
-        <input type="image" src="../assets/img/githubLogoG.png" alt="GitHub" width="100" height="100">
+        <input type="image" src="../assets/img/githubLogoG.png" alt="GitHub" width="100" height="100" disabled>
         </form>
         <%end%>
       
@@ -171,11 +179,11 @@
       
       <% if !(hash_object["CodeClimate"] == "No known information") then%> 
       <form action="<%= hash_object["CodeClimate"]%>" style="padding: 0px 15px 0px 15px">
-      <input type="image" src="../assets/img/codeclimateLogo.png" alt="CodeClimate" width="100" height="100">
+      <input type="image" src="../assets/img/codeclimateLogo.png" alt="CodeClimate" width="100" height="100" >
       </form>
         <%else%>
          <form action="" style="padding: 0px 15px 0px 15px">
-          <input type="image" src="../assets/img/codeclimateLogoG.png" alt="CodeClimate" width="100" height="100">
+          <input type="image" src="../assets/img/codeclimateLogoG.png" alt="CodeClimate" width="100" height="100" disabled>
           </form>
       <%end%>
         
@@ -189,7 +197,7 @@
       </form>
         <%else%>
         <form action="" style="padding: 0px 15px 0px 15px">
-      <input type="image" src="../assets/img/pivotalLogoG.png" alt="PivotalTracker" width="100" height="100"> 
+      <input type="image" src="../assets/img/pivotalLogoG.png" alt="PivotalTracker" width="100" height="100" disabled> 
       </form>
         <%end%>
      
