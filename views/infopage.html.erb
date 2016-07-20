@@ -125,24 +125,24 @@
       </div>
 
      <h4 style="position:relative; right:25px">
-        
+        <% if !(hash_object["Deployment"] == "No known information") then%> 
         Website
-
+        <%end%>
       </h4>
-      <h4 style="position:relative; right:-17px">
-        
+      <h4 style="position:relative; right:-15px">
+        <% if !(hash_object["Repo"] == "No known information") then%> 
         GitHub Repo
-
+        <%end%>
       </h4>
-      <h4 style="position:relative; left:42px">
-       
+      <h4 style="position:relative; left:37px">
+        <% if !(hash_object["CodeClimate"] == "No known information") then%> 
         CodeClimate
-
+        <%end%>
       </h4>
       <h4 style="position:relative; left:60px">
-        
+        <% if !(hash_object["Tracker"] == "No known information") then%> 
         Pivotal Tracker
-
+        <%end%>
       </h4>
       <br>
 
