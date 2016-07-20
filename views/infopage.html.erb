@@ -116,13 +116,12 @@
         </div>
       </div>
 
-     
-      <h4 style="position:relative; right:25px">
+     <h4 style="position:relative; right:25px">
         <% if !(hash_object["Deployment"] == "No known information") then%> 
         Website
         <%end%>
       </h4>
-      <h4 style="position:relative; right:-27px">
+      <h4 style="position:relative; right:-17px">
         <% if !(hash_object["Repo"] == "No known information") then%> 
         GitHub Repo
         <%end%>
@@ -143,8 +142,8 @@
       if !(hash_object["Deployment"].include? "http")then
         urlholder = "https://"
       end%>
-      <form action=<%= urlholder + hash_object["Deployment"]%> style="padding: 20px 0px 0px 15px">
-        <input type="image" src="../assets/img/internetLogo.png" alt="Website" width="120" height="120">
+      <form action=<%= urlholder + hash_object["Deployment"]%> style="padding: 0px 15px 0px 15px">
+        <input type="image" src="../assets/img/internetLogo.png" alt="Website" width="95" height="95">
       </form>
       <!-- <img src="../assets/img/blank.png" style="width:30px;height:100px;"> -->
       <form action="<%= hash_object["Repo"]%>" style="padding: 0px 15px 0px 15px">
