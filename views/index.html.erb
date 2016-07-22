@@ -137,9 +137,9 @@
                         %>
                       <% elsif hash_object["Contact Email"].include? "@"%>
                       <% mail = Mail::Address.new(hash_object["Contact Email"]) #this allows the email to be exracted from other material. If there is an email, mailto function is called%>
-                      For <a href="mailto:<%=mail.address%>"><%= hash_object["Customer"]%></a>
+                      For <a style = "color: #f85c37" href="mailto:<%=mail.address%>"><%= hash_object["Customer"]%></a>
                       <%else%>
-                      For <a target="_blank" href="<%= hash_object["Contact Email"]%>"><%= hash_object["Customer"] #if the email is a link to a website, this will become a link to that site
+                      For <a style = "color: #f85c37" target="_blank" href="<%= hash_object["Contact Email"]%>"><%= hash_object["Customer"] #if the email is a link to a website, this will become a link to that site
                         %></a>
                       <%end%>
                     </div>
@@ -226,6 +226,7 @@
           <div class="col-lg-4">
           </div>
           <div class="col-lg-4">
+            <h3>Email</h3>
             <h3><a href="mailto:fox@cs.berkeley.edu">projects@saas-class.org</a></h3>
             <br>
           </div>
