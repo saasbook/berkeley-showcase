@@ -30,10 +30,10 @@
   <body data-spy="scroll" data-offset="0" data-target="#theMenu">
     <!-- =========== Info Button =============== -->
     <nav class="menu" id="theMenu">  
-    <a href="/info"><button type="button" class="btn btn-default" aria-label="Left Align"> 
-  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-</button>
-</a>
+      <a href="/info"><button type="button" class="btn btn-default" aria-label="Left Align"> 
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+      </button>
+      </a>
     </nav>
     <!-- ========== HEADER SECTION ========== -->
     <div id="itemwrap">
@@ -207,7 +207,6 @@
           </div>
           <%end%>
           <%end %>
-
           <h3> You Searched For "<%=@values%>"<a style="color:#f85c37" href="/projects"> <br>Cancel Search</a></h3>
           <%if result == 0 then %>
           <h1>No Results</h1>
@@ -226,19 +225,18 @@
           <div class="col-lg-4">
           </div>
           <div class="col-lg-4">
-            <h3>Email</h3>
-            <h3><a href="mailto:fox@cs.berkeley.edu">projects@saas-class.org</a></h3>
+            <h3><a style = "color:#f85c37;" href="mailto:fox@cs.berkeley.edu">projects@saas-class.org</a></h3>
             <br>
           </div>
         </div>
       </div>
     </div>
-    </div>
     <!-- /container -->
-    </div><!-- /f -->
     <div id="c">
       <div class="container">
-        <p>Created by <a href="http://www.berkeley.edu">Berkeley</a></p>
+        <br>
+        <p>Created by <a target="_blank" style = "color:#f85c37;" href="http://www.berkeley.edu">Berkeley</a></p>
+        <br>
       </div>
     </div>
     <!-- Bootstrap core JavaScript
