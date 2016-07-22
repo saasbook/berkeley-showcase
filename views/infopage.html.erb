@@ -203,7 +203,7 @@
      
       <br>
       <br>
-       <% if !(hash_object["Poster PDF"].include? "http") then%> 
+       <% if (hash_object["Poster PDF"].include? "http") then%> 
             <h4>Poster</h4>
             <p><a target="_blank" href="<%= hash_object["Poster PDF"]%>">Click Here to access Poster</a></p>
             <%end%>
