@@ -86,15 +86,11 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2">
-            <h3>
-              <br> 
-              <bold>Description</bold>
-
-              <br/>
+            <h1 style="font-size:25px;"><strong>Description</strong>
               <% array_id = @task.split('-')
                 hash_holder.each do |hash_object|  
                   if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %>
-              <h2><%=hash_object["Description"]%></h2>
+              <h1 style="font-size:20px;"><%=hash_object["Description"]%></h3>
 
               <% end %>
               <% end%>
@@ -111,8 +107,7 @@
       <div class="container">
         <div class="row">
           <br>
-          <h3>MORE DETAILS</h3>
-          <br>
+          <h3></h3>
           <% array_id = @task.split('-')
             hash_holder.each do |hash_object|  
               if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %>
@@ -124,32 +119,10 @@
         </div>
       </div>
 
-     <h4 style="position:relative; right:25px">
-        <% if !(hash_object["Deployment"] == "No known information") then%> 
-        Website
-        <%end%>
-      </h4>
-      <h4 style="position:relative; right:-15px">
-        <% if !(hash_object["Repo"] == "No known information") then%> 
-        GitHub Repo
-        <%end%>
-      </h4>
-      <h4 style="position:relative; left:37px">
-        <% if !(hash_object["CodeClimate"] == "No known information") then%> 
-        CodeClimate
-        <%end%>
-      </h4>
-      <h4 style="position:relative; left:60px">
-        <% if !(hash_object["Tracker"] == "No known information") then%> 
-        Pivotal Tracker
-        <%end%>
-      </h4>
-      <br>
-
       <% urlholder = ""
-      if !(hash_object["Deployment"].include? "http")then
-        urlholder = "https://"
-      end%>
+        if !(hash_object["Deployment"].include? "http")then
+          urlholder = "https://"
+        end%>
 
       
         <% if !(hash_object["Deployment"] == "No known information") then%> 
@@ -260,7 +233,6 @@
           <div class="col-lg-4">
           </div>
           <div class="col-lg-4">
-            <h3>Email</h3>
             <h3><a href="mailto:fox@cs.berkeley.edu">projects@saas-class.org</a></h3>
             <br>
           </div>
