@@ -38,7 +38,7 @@
             # if the values of the hash match that of the url 
             if (hash_object["Semester"] == array_id[0]) && (hash_object["Team#"] == array_id[1]) then %> 
         <%if !(hash_object["Repo"] == "No known information") then%> 
-        <h1 style = "font-size: 50px;"> <a target="_blank" href=<%= hash_object["Deployment"]%>> <%=hash_object["Project"]%> </a></h1>
+        <h1 style = "font-size: 90px;"> <a target="_blank" href=<%= hash_object["Deployment"]%>> <%=hash_object["Project"]%> </a></h1>
         <%else %>
         <h1 style = "font-size: 90px;">  <%=hash_object["Project"]%> </h1>
         <%end
