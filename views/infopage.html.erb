@@ -203,15 +203,15 @@
      
       <br>
       <br>
-       <% if !(hash_object["Poster PDF"] == "No known information") then%> 
+       <% if !(hash_object["Poster PDF"].include? "http") then%> 
             <h4>Poster</h4>
             <p><a target="_blank" href="<%= hash_object["Poster PDF"]%>">Click Here to access Poster</a></p>
             <%end%>
-      <% if !(hash_object["EntryInterview"] == "No known information") then%> 
+      <% if (hash_object["EntryInterview"].include? "http") then%> 
       <h4>Entry Interview</h4>
       <p><a target="_blank" href="<%= hash_object["EntryInterview"]%>">Click Here to view the Entry Interview</a></p>
       <%end%>
-      <% if !(hash_object["ExitInterview"] == "No known information") then%> 
+      <% if (hash_object["ExitInterview"].include? "http") then%> 
       <h4>Exit Interview</h4>
       <p><a target="_blank" href="<%= hash_object["ExitInterview"]%>">Click Here to view the Exit Interview</a></p>
       <%end%>
