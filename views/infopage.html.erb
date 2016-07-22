@@ -45,7 +45,7 @@
           screencast = hash_object["Screencast"]
             if !(screencast == "No known information") then%>
         <% if screencast.include? "youtu"
-          youtube_url = "https://www.youtube.com/embed/" + screencast[(screencast.length-12)..(screencast.length-1)]%>
+          youtube_url = "https://www.youtube.com/embed/" + screencast[(screencast.length-11)..(screencast.length-1)]%>
         <iframe src= <%=youtube_url%> width="700px" height="400px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <% elsif screencast.include? "vimeo"
           if screencast.include? "https" 
