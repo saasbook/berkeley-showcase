@@ -4,7 +4,7 @@ require 'sinatra'
 
 
     
-session = GoogleDrive.saved_session(path_or_config = nil, proxy = nil, client_id = "388409492168-tjsug3d5bfbb3fuijibdrnqplimp2cen.apps.googleusercontent.com", client_secret = ENV[GOOGLE_CLIENT_SECRET])
+session = GoogleDrive.saved_session(nil, "388409492168-tjsug3d5bfbb3fuijibdrnqplimp2cen.apps.googleusercontent.com", ENV[GOOGLE_CLIENT_SECRET])
 # get important information such as user password and username etc.
 ws = session.spreadsheet_by_key("1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY").worksheets[1]
 # connects to the specific spreadsheet and page 2 of it
