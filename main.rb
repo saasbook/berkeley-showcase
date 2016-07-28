@@ -2,16 +2,7 @@ require 'google_drive'
 require 'json'
 require 'sinatra'
 
-{
-  "client_id": "388409492168-tjsug3d5bfbb3fuijibdrnqplimp2cen.apps.googleusercontent.com",
-  "client_secret": "n5VWDbHvvxfdDTypqCpyD4pN",
-  "scope": [
-    "https://www.googleapis.com/auth/drive",
-    "https://spreadsheets.google.com/feeds/"
-  ],
-  "refresh_token": "1/72gCUPmxoa8LMNDOEsFDaBiHne1ALLJl8VebmkHgZKk"
-}
-session = GoogleDrive.saved_session(nil, client_id = "388409492168-tjsug3d5bfbb3fuijibdrnqplimp2cen.apps.googleusercontent.com", client_secret = "n5VWDbHvvxfdDTypqCpyD4pN")
+def self.saved_session(path_or_config = nil, proxy = nil, client_id = "388409492168-tjsug3d5bfbb3fuijibdrnqplimp2cen.apps.googleusercontent.com", client_secret = ENV[GOOGLE_CLIENT_SECRET])
 # get important information such as user password and username etc.
 ws = session.spreadsheet_by_key("1FnllGoYuUjhdF1xF1kQRIrWrv_znxqokSq84-uNw8wY").worksheets[1]
 # connects to the specific spreadsheet and page 2 of it
