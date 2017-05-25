@@ -46,3 +46,4 @@ post '/projects' do
     @values =  params[:text]
     erb :"index.html" #sends the information to index.html (projects page)
 end
+ 
