@@ -69,9 +69,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2">
-            <h3>WELCOME TO <br/><strong>SHOWCASE</strong><br/>
-              CREATED BY BERKELEY
-            </h3>
+            <h3>Projects</h3>
           </div>
         </div>
       </div>
@@ -83,7 +81,6 @@
     <div id="g">
       <div class="container">
         <div class="row">
-          <h3><strong>PROJECTS</strong></h3>
           <% @projects.each do |project| %> 
           <div class="col-lg-3">
             <div class="wrapper">
@@ -103,7 +100,7 @@
 
                   </div>
                   <article class="card__article">
-                    <h2><a style="color:#f85c37;" target="_blank" href="<%= project["deployment_url"]%>"><%= project["name"]%></a></h2>
+                    <h2><a style="color:#f85c37;" target="_blank" href="<%= project["repository_url"]%>"><%= project["name"]%></a></h2>
                     <p><%= project["description"]%></p>
                   </article>
                 </div>
