@@ -55,9 +55,9 @@
         <form class="flexsearch--form" action="/projects" method="POST">
           <div class="flexsearch--input-wrapper">
             <% if @search != '' %>
-              <input class="flexsearch--input" type="text" name="searchtext" value="<%= @search %>">
+            <input class="flexsearch--input" type="text" name="searchtext" value="<%= @search %>">
             <% else %>
-              <input class="flexsearch--input" type="text" name="searchtext" placeholder=" Search">
+            <input class="flexsearch--input" type="text" name="searchtext" placeholder=" Search">
             <% end %>
           </div>
           <input class="flexsearch--submit" type="submit" value="&#10140;"/>
@@ -85,25 +85,20 @@
           <div class="col-lg-3">
             <div class="wrapper">
               <div class="card radius shadowDepth1">
+                <!--
                 <div class="card__image border-tlr-radius">
-                  <img src="../assets/img/sampleImg<%= 1+rand(6) %>.jpeg" alt="image" class="border-tlr-radius" height="130">
+                  <% img = project['most_recent_screenshot_url'] %>
+                  <% img = "../assets/img/sampleImg#{1+rand(6)}.jpeg" if img == '' %>
+                  <img src="<%= img %>" alt="image" class="border-tlr-radius" height="130">
                 </div>
-                <div class="card__content card__padding">
-                  <div class="card__share">
-                    <div class="card__social">  
-                      <a class="share-icon facebook" href="#"><span class="fa fa-facebook"></span></a>
-                      <a class="share-icon twitter" href="#"><span class="fa fa-twitter"></span></a>
-                      <a class="share-icon googleplus" href="#"><span class="fa fa-google-plus"></span></a>
-                    </div>
-                  </div>
-                  <div class="card__meta">
-
-                  </div>
-                  <article class="card__article">
-                    <h2><a style="color:#f85c37;" target="_blank" href="<%= project["repository_url"]%>"><%= project["name"]%></a></h2>
-                    <p><%= project["description"]%></p>
-                  </article>
-                </div>
+                -->
+                <article class="card__article">
+                  <h2><a style="color:#f85c37;" target="_blank" href="<%= project["repository_url"]%>"><%= project["name"]%></a></h2>
+                  <% unless (video = project['most_recent_screencast_url']) == '' %>
+                  <p class="h4"><a href="<%= video %>" target="_blank">Screencast</a></p>
+                  <% end %>
+                  <p><%= project["description"]%></p>
+                </article>
                 <div class="card__action">
                   <div class="card__author">
                     <div class="card__author-content">
@@ -118,6 +113,7 @@
         </div>
       </div>
     </div>
+
     <!-- End of Cards Section... LOT OF CODE! -->
     <!-- ========== FOOTER SECTION ========== -->
     <section id="contact" name="contact"></section>
@@ -144,7 +140,7 @@
     </div>
     <script>
       $('.carousel').carousel({
-      interval: 3500
+        interval: 3500
       })
     </script>
   </body>
