@@ -3,7 +3,7 @@ GEM
   specs:
     httparty (0.15.5)
       multi_xml (>= 0.5.2)
-    json (2.0.1)
+    json (2.3.0)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
     mime-types (3.1)
